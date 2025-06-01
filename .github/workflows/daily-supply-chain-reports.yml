@@ -262,11 +262,14 @@ jobs:
           echo "Script timed out or failed after 5 minutes"
           exit 1
         }
-      
-    - name: Commit and push changes
+        - name: Commit and push changes
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
+        # Set the TODAY variable
+        TODAY=$(date +%Y-%m-%d)
+        echo "Today's date: $TODAY"
+        
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         
@@ -276,12 +279,16 @@ jobs:
         
         if [[ -n $(git status --porcelain) ]]; then
           echo "Changes detected, committing..."
-          git add "$TODAY/supply-chain-report.md" "$TODAY/summary.json"
-          git add "$TODAY" || {
-            echo "Failed to add files to git"
+          
+          # Add the entire date folder to ensure all files are included
+          git add "$TODAY/" || {
+            echo "Failed to add date folder to git"
             exit 1
           }
-          git commit -m "Daily supply chain security report - $(date +%Y-%m-%d)" || {
+          
+          # Also add any other generated files that might be useful
+          git add fetch_reports.js || echo "fetch_reports.js not found or already tracked"
+            git commit -m "Daily supply chain security report - $TODAY" || {
             echo "Commit failed"
             exit 1
           }

@@ -1,0 +1,28 @@
+# Node.js dependencies
+node_modules/
+package-lock.json
+
+# Temporary script files (these are generated during CI)
+fetch_reports.js
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
