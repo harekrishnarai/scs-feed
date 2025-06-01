@@ -202,6 +202,36 @@ jobs:
             }
           }
           
+          // Add footer with proper groupedReports reference
+          markdown += `## About This Report\n\n`;
+          markdown += `This report is automatically generated daily by monitoring various cybersecurity news sources, `;
+          markdown += `RSS feeds, and research repositories for supply chain security-related content.\n\n`;
+          markdown += `**Monitored Sources:**\n`;
+          [...sources, ...apiSources].forEach(source => {
+            markdown += `- ${source.name}\n`;
+          });
+          markdown += `\n**Keywords Monitored:** supply chain, dependency, package, malicious package, `;
+          markdown += `software supply, npm, pypi, backdoor, vulnerability\n\n`;
+          markdown += `**Last Updated:** ${new Date().toISOString()}\n`;
+          
+          // Write to file
+          const filePath = path.join(folderPath, 'supply-chain-report.md');
+          fs.writeFileSync(filePath, markdown);
+          
+          console.log(`Report generated: ${filePath}`);
+          console.log(`Found ${allReports.length} relevant reports`);
+          
+          // Also create a summary file for easy tracking
+          const summaryPath = path.join(folderPath, 'summary.json');
+          const summaryData = {
+            date: dateStr,
+            totalReports: allReports.length,
+            sources: allReports.length > 0 ? Object.keys(groupedReports || {}) : [],
+            reportPath: filePath
+          };
+          fs.writeFileSync(summaryPath, JSON.stringify(summaryData, null, 2));
+          }
+          
           // Add footer
           markdown += `## About This Report\n\n`;
           markdown += `This report is automatically generated daily by monitoring various cybersecurity news sources, `;
