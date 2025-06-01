@@ -276,7 +276,11 @@ jobs:
         
         if [[ -n $(git status --porcelain) ]]; then
           echo "Changes detected, committing..."
-          git add .
+          git add "$TODAY/supply-chain-report.md" "$TODAY/summary.json"
+          git add "$TODAY" || {
+            echo "Failed to add files to git"
+            exit 1
+          }
           git commit -m "Daily supply chain security report - $(date +%Y-%m-%d)" || {
             echo "Commit failed"
             exit 1
