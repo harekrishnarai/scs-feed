@@ -173,21 +173,21 @@ jobs:
           markdown += `**Date:** ${dateStr}\n`;
           markdown += `**Total Reports Found:** ${allReports.length}\n\n`;
           
+          // Group by source for both report generation and summary
+          const groupedReports = {};
+          allReports.forEach(report => {
+            if (!groupedReports[report.source]) {
+              groupedReports[report.source] = [];
+            }
+            groupedReports[report.source].push(report);
+          });
+          
           if (allReports.length === 0) {
             markdown += `## No Relevant Reports Found Today\n\n`;
             markdown += `No supply chain security incidents or reports were detected from monitored sources today.\n`;
           } else {
             markdown += `## Summary\n\n`;
             markdown += `This automated report aggregates supply chain security-related news, vulnerabilities, and research from multiple trusted sources.\n\n`;
-            
-            // Group by source
-            const groupedReports = {};
-            allReports.forEach(report => {
-              if (!groupedReports[report.source]) {
-                groupedReports[report.source] = [];
-              }
-              groupedReports[report.source].push(report);
-            });
             
             for (const [sourceName, reports] of Object.entries(groupedReports)) {
               markdown += `## ${sourceName}\n\n`;
@@ -200,36 +200,6 @@ jobs:
                 markdown += `---\n\n`;
               });
             }
-          }
-          
-          // Add footer with proper groupedReports reference
-          markdown += `## About This Report\n\n`;
-          markdown += `This report is automatically generated daily by monitoring various cybersecurity news sources, `;
-          markdown += `RSS feeds, and research repositories for supply chain security-related content.\n\n`;
-          markdown += `**Monitored Sources:**\n`;
-          [...sources, ...apiSources].forEach(source => {
-            markdown += `- ${source.name}\n`;
-          });
-          markdown += `\n**Keywords Monitored:** supply chain, dependency, package, malicious package, `;
-          markdown += `software supply, npm, pypi, backdoor, vulnerability\n\n`;
-          markdown += `**Last Updated:** ${new Date().toISOString()}\n`;
-          
-          // Write to file
-          const filePath = path.join(folderPath, 'supply-chain-report.md');
-          fs.writeFileSync(filePath, markdown);
-          
-          console.log(`Report generated: ${filePath}`);
-          console.log(`Found ${allReports.length} relevant reports`);
-          
-          // Also create a summary file for easy tracking
-          const summaryPath = path.join(folderPath, 'summary.json');
-          const summaryData = {
-            date: dateStr,
-            totalReports: allReports.length,
-            sources: allReports.length > 0 ? Object.keys(groupedReports || {}) : [],
-            reportPath: filePath
-          };
-          fs.writeFileSync(summaryPath, JSON.stringify(summaryData, null, 2));
           }
           
           // Add footer
@@ -256,7 +226,7 @@ jobs:
           fs.writeFileSync(summaryPath, JSON.stringify({
             date: dateStr,
             totalReports: allReports.length,
-            sources: Object.keys(groupedReports),
+            sources: allReports.length > 0 ? Object.keys(groupedReports || {}) : [],
             reportPath: filePath
           }, null, 2));
         }
