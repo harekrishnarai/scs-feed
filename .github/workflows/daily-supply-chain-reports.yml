@@ -252,8 +252,7 @@ jobs:
           })
           .catch((error) => {
             console.error('Script failed:', error);
-            process.exit(1);
-          });
+            process.exit(1);        });
         EOF
         
     - name: Fetch and generate reports
@@ -262,7 +261,8 @@ jobs:
           echo "Script timed out or failed after 5 minutes"
           exit 1
         }
-        - name: Commit and push changes
+        
+    - name: Commit and push changes
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
@@ -279,8 +279,7 @@ jobs:
         
         if [[ -n $(git status --porcelain) ]]; then
           echo "Changes detected, committing..."
-          
-          # Add the entire date folder to ensure all files are included
+            # Add the entire date folder to ensure all files are included
           git add "$TODAY/" || {
             echo "Failed to add date folder to git"
             exit 1
@@ -288,7 +287,8 @@ jobs:
           
           # Also add any other generated files that might be useful
           git add fetch_reports.js || echo "fetch_reports.js not found or already tracked"
-            git commit -m "Daily supply chain security report - $TODAY" || {
+          
+          git commit -m "Daily supply chain security report - $TODAY" || {
             echo "Commit failed"
             exit 1
           }
