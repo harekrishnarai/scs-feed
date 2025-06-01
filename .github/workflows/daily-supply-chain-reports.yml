@@ -87,7 +87,13 @@ jobs:
 
         async function fetchRSSFeed(source) {
           try {
-            const parser = new Parser();
+            console.log(`Starting fetch for ${source.name}...`);
+            const parser = new Parser({
+              timeout: 10000, // 10 second timeout
+              headers: {
+                'User-Agent': 'Supply-Chain-Monitor/1.0'
+              }
+            });
             const feed = await parser.parseURL(source.url);
             
             const relevantItems = feed.items.filter(item => {
@@ -95,6 +101,7 @@ jobs:
               return source.keywords.some(keyword => content.includes(keyword.toLowerCase()));
             }).slice(0, 5); // Limit to 5 most recent relevant items
             
+            console.log(`Found ${relevantItems.length} relevant items from ${source.name}`);
             return relevantItems.map(item => ({
               title: item.title,
               link: item.link,
@@ -111,6 +118,7 @@ jobs:
         async function fetchGitHubCommits(source) {
           try {
             const response = await axios.get(source.url, {
+              timeout: 10000, // 10 second timeout
               headers: {
                 'User-Agent': 'Supply-Chain-Monitor/1.0',
                 'Accept': 'application/vnd.github.v3+json'
@@ -125,6 +133,7 @@ jobs:
               source: source.name
             }));
             
+            console.log(`Found ${recentCommits.length} commits from ${source.name}`);
             return recentCommits;
           } catch (error) {
             console.error(`Error fetching ${source.name}:`, error.message);
@@ -235,7 +244,11 @@ jobs:
         EOF
         
     - name: Fetch and generate reports
-      run: node fetch_reports.js
+      run: |
+        timeout 300 node fetch_reports.js || {
+          echo "Script timed out or failed after 5 minutes"
+          exit 1
+        }
       
     - name: Commit and push changes
       run: |
@@ -243,10 +256,13 @@ jobs:
         git config --local user.name "Supply Chain Monitor Bot"
         
         # Check if there are any changes
+        git status
         if [[ -n $(git status --porcelain) ]]; then
+          echo "Changes detected, committing..."
           git add .
           git commit -m "Daily supply chain security report - $(date +%Y-%m-%d)"
-          git push
+          echo "Pushing changes..."
+          git push origin main
           echo "Report committed and pushed successfully"
         else
           echo "No changes to commit"
