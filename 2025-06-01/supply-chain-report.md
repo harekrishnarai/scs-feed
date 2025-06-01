@@ -213,4 +213,4 @@ This report is automatically generated daily by monitoring various cybersecurity
 
 **Keywords Monitored:** supply chain, dependency, package, malicious package, software supply, npm, pypi, backdoor, vulnerability
 
-**Last Updated:** 2025-06-01T17:21:16.672Z
+**Last Updated:** 2025-06-01T18:43:54.823Z
