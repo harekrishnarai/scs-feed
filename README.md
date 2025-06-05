@@ -4,7 +4,7 @@ An automated daily monitoring system that aggregates supply chain security news,
 
 ## 🔍 Overview
 
-This project automatically generates daily reports on supply chain security incidents, malicious packages, dependency vulnerabilities, and related cybersecurity threats. The system monitors multiple RSS feeds and APIs to provide comprehensive coverage of the supply chain security landscape.
+This project automatically generates daily reports on supply chain security incidents, malicious packages, dependency vulnerabilities, and related cybersecurity threats. The system monitors multiple RSS feeds and APIs to provide comprehensive coverage of the supply chain security landscape. Reports are published to the repository and can be sent directly to users via Telegram notifications.
 
 ## 📊 What We Monitor
 
@@ -35,7 +35,8 @@ The system runs automatically every day at midnight UTC using GitHub Actions. It
 2. **Filters** content using relevant keywords
 3. **Generates** a comprehensive markdown report
 4. **Commits** the report to the repository
-5. **Alerts** on critical findings (configurable)
+5. **Sends** notifications via Telegram to configured users/groups
+6. **Alerts** on critical findings (configurable)
 
 ## 📁 Repository Structure
 
@@ -94,6 +95,8 @@ You can manually trigger the workflow:
 
 ### Environment Variables
 - `GITHUB_TOKEN` - Automatically provided by GitHub Actions for repository access
+- `TELEGRAM_BOT_TOKEN` - API token for your Telegram bot (required for notifications)
+- `TELEGRAM_CHAT_IDS` - Comma-separated list of Telegram chat IDs to send notifications to
 
 ### Customization Options
 
@@ -135,6 +138,7 @@ on:
 - **cheerio** - HTML parsing (if needed)
 - **@octokit/rest** - GitHub API integration
 - **rss-parser** - RSS feed parsing
+- **Telegram Bot API** - For sending notifications
 
 ### Rate Limiting
 - 1-second delay between source requests
@@ -145,6 +149,38 @@ on:
 - Individual source failures don't stop the entire process
 - Comprehensive logging for debugging
 - Graceful degradation when sources are unavailable
+
+## 📲 Telegram Notifications
+
+The system can automatically send report summaries to Telegram chats (users or groups) after generating daily reports. Notifications include:
+
+- Report header with date and total findings
+- Summary of key findings
+- Count of reports by source
+- Direct links to top findings
+- Link to the full report in the repository
+
+### Setting Up Telegram Notifications
+
+1. **Create a Telegram Bot**:
+   - Talk to [@BotFather](https://t.me/botfather) on Telegram
+   - Use the `/newbot` command and follow instructions
+   - Copy the API token provided by BotFather
+
+2. **Get Chat IDs**:
+   - For personal chat: Talk to [@userinfobot](https://t.me/userinfobot)
+   - For groups: Add [@RawDataBot](https://t.me/RawDataBot) to group temporarily
+
+3. **Set Repository Secrets**:
+   - Go to your GitHub repository
+   - Navigate to Settings > Secrets and variables > Actions
+   - Add two repository secrets:
+     - `TELEGRAM_BOT_TOKEN`: Your bot's API token
+     - `TELEGRAM_CHAT_IDS`: Comma-separated list of chat IDs (e.g., `123456789,-100987654321`)
+
+4. **Test the Integration**:
+   - Manually trigger the workflow from GitHub Actions
+   - Verify that notifications are received in Telegram
 
 ## 📋 Report Format
 
@@ -180,6 +216,7 @@ To contribute to this project:
 - Add email notifications
 - Implement trending analysis
 - Add RSS feed output for reports
+- Expand notification options beyond Telegram
 
 ## 📊 Usage Statistics
 

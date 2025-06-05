@@ -28,6 +28,11 @@ jobs:
       run: |
         npm install axios cheerio @octokit/rest rss-parser
         
+    - name: Ensure notifications directory structure
+      run: |
+        # Create notifications directory if it doesn't exist
+        mkdir -p notifications
+        
     - name: Create report fetcher script
       run: |
         cat > fetch_reports.js << 'EOF'
@@ -242,20 +247,51 @@ jobs:
           }, null, 2));
           
           console.log('Daily report generation completed successfully!');
+          
+          // Return the report file path for Telegram notification
+          return filePath;
         }
 
+        // Import the Telegram notification module if available
+        let telegramNotify = null;
+        try {
+          telegramNotify = require('./notifications/telegram_notify');
+          console.log('Telegram notification module loaded successfully');
+        } catch (error) {
+          console.log('Telegram notification module not available, notifications will be skipped');
+        }
+        
         console.log('Script starting...');
         generateDailyReport()
-          .then(() => {
+          .then((reportPath) => {
             console.log('Script completed successfully');
+            
+            // Send Telegram notification if module is available and properly configured
+            if (telegramNotify && typeof telegramNotify.sendReportToTelegram === 'function') {
+              console.log('Sending Telegram notifications...');
+              return telegramNotify.sendReportToTelegram(reportPath)
+                .catch(error => {
+                  console.error('Telegram notification failed:', error.message);
+                  // Don't fail the workflow if notifications fail
+                });
+            }
+          })
+          .then(() => {
+            console.log('All tasks completed');
             process.exit(0);
           })
           .catch((error) => {
             console.error('Script failed:', error);
-            process.exit(1);        });
+            process.exit(1);
+          });
         EOF
         
     - name: Fetch and generate reports
+      env:
+        TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+        TELEGRAM_CHAT_IDS: ${{ secrets.TELEGRAM_CHAT_IDS }}
+        GITHUB_SERVER_URL: ${{ github.server_url }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
       run: |
         timeout 300 node fetch_reports.js || {
           echo "Script timed out or failed after 5 minutes"
