@@ -1,0 +1,14 @@
+{
+  "date": "2025-06-06",
+  "totalReports": 17,
+  "sources": [
+    "The Hacker News",
+    "Bleeping Computer Security",
+    "Schneier on Security",
+    "Sonatype Security Research",
+    "Krebs on Security",
+    "CISA Advisories",
+    "OpenSSF Package Analysis"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2025-06-06/supply-chain-report.md"
+}
