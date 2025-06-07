@@ -89,53 +89,78 @@ function formatReportForTelegram(reportContent) {
   
   mainMessage += '🔍 *Reports by Source:*\n\n';
   
+  let totalReports = 0;
   for (const source of sourceSections) {
     const sourceLine = `${source.title.replace('##', '•')} - ${source.reports.length} reports\n`;
     mainMessage += sourceLine;
+    totalReports += source.reports.length;
   }
   
-  mainMessage += '\n👉 _See full report in repository._';
+  mainMessage += `\n📊 *Total Reports Found: ${totalReports}*\n`;
+  mainMessage += '\n👉 _All reports will be sent in the following messages._';
   
   messages.push(mainMessage);
   
-  // Second message contains the top 3 most recent reports (with links)
+  // Additional messages contain all reports with details
   let recentReports = '';
   let reportsAdded = 0;
+  const MAX_REPORTS_PER_MESSAGE = 5; // Limit per message to avoid hitting Telegram limits
   
   for (const source of sourceSections) {
-    if (reportsAdded >= 3) break;
-    
     if (source.reports.length > 0) {
-      recentReports += `${source.title}\n\n`;
+      // Start a new message section for this source
+      let sourceReports = `${source.title}\n\n`;
+      let sourceReportsCount = 0;
       
       // Find the report titles and links for this source
       const sourceStartIndex = lines.findIndex(line => line === source.title);
       if (sourceStartIndex !== -1) {
-        for (let i = sourceStartIndex + 1; i < lines.length && reportsAdded < 3; i++) {
+        for (let i = sourceStartIndex + 1; i < lines.length; i++) {
           const line = lines[i];
           if (line.startsWith('### ')) {
-            recentReports += `${line}\n`;
+            sourceReports += `${line}\n`;
             
-            // Get the link if available
-            for (let j = i + 1; j < i + 5; j++) {
+            // Get the link and published date if available
+            for (let j = i + 1; j < i + 10; j++) {
               if (lines[j] && lines[j].includes('**Link:**')) {
-                recentReports += `${lines[j]}\n\n`;
+                sourceReports += `${lines[j]}\n`;
+              }
+              if (lines[j] && lines[j].includes('**Published:**')) {
+                sourceReports += `${lines[j]}\n\n`;
                 break;
               }
             }
             
+            sourceReportsCount++;
             reportsAdded++;
+            
+            // If we've added enough reports for this message, start a new one
+            if (sourceReportsCount >= MAX_REPORTS_PER_MESSAGE) {
+              if (recentReports.length > 0) {
+                messages.push('📋 *All Reports:*\n\n' + recentReports);
+              }
+              recentReports = sourceReports;
+              sourceReports = '';
+              sourceReportsCount = 0;
+            } else {
+              recentReports += sourceReports;
+              sourceReports = `${source.title}\n\n`; // Reset for next batch
+            }
           } else if (line.startsWith('## ')) {
             break;
           }
         }
       }
+      
+      // Add any remaining source reports
+      if (sourceReports.length > source.title.length + 4) {
+        recentReports += sourceReports;
+      }
     }
   }
   
   if (recentReports.length > 0) {
-    recentReports = '🔥 *Recent Highlights:*\n\n' + recentReports;
-    messages.push(recentReports);
+    messages.push('📋 *All Reports:*\n\n' + recentReports);
   }
   
   // Split any message that exceeds size limit
