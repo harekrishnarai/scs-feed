@@ -146,8 +146,23 @@ jobs:
               }
             });
             const feed = await parser.parseURL(source.url);
-            
-            const relevantItems = feed.items.filter(item => {
+              const relevantItems = feed.items.filter(item => {
+              // Date filtering - only include articles from today or yesterday
+              const articleDate = new Date(item.pubDate);
+              const today = new Date();
+              const yesterday = new Date(today);
+              yesterday.setDate(today.getDate() - 1);
+              
+              // Reset time to start of day for accurate comparison
+              const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+              const yesterdayStart = new Date(yesterday.getFullYear(), yesterday.getMonth(), yesterday.getDate());
+              const articleDateStart = new Date(articleDate.getFullYear(), articleDate.getMonth(), articleDate.getDate());
+              
+              // Skip articles that are not from today or yesterday
+              if (articleDateStart < yesterdayStart) {
+                return false;
+              }
+              
               const content = (item.title + ' ' + (item.contentSnippet || item.content || '') + ' ' + (item.categories || []).join(' ')).toLowerCase();
               
               // Enhanced keyword matching with partial matches, stemming, and contextual analysis
@@ -294,10 +309,25 @@ jobs:
             });
             
             let recentCommits = [];
-            
-            // Special handling for malicious-packages repository
+              // Special handling for malicious-packages repository
             if (source.name === "OpenSSF Malicious Packages") {
               for (const commit of response.data.slice(0, 10)) {
+                // Date filtering - only include commits from today or yesterday
+                const commitDate = new Date(commit.commit.author.date);
+                const today = new Date();
+                const yesterday = new Date(today);
+                yesterday.setDate(today.getDate() - 1);
+                
+                // Reset time to start of day for accurate comparison
+                const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                const yesterdayStart = new Date(yesterday.getFullYear(), yesterday.getMonth(), yesterday.getDate());
+                const commitDateStart = new Date(commitDate.getFullYear(), commitDate.getMonth(), commitDate.getDate());
+                
+                // Skip commits that are not from today or yesterday
+                if (commitDateStart < yesterdayStart) {
+                  continue;
+                }
+                
                 try {
                   // Fetch detailed commit info to get file changes
                   const commitResponse = await axios.get(commit.url, {
@@ -349,16 +379,30 @@ jobs:
                 
                 // Limit to prevent too many API calls
                 if (recentCommits.length >= 10) break;
-              }
-            } else {
-              // Default behavior for other GitHub sources
-              recentCommits = response.data.slice(0, 3).map(commit => ({
-                title: commit.commit.message.split('\n')[0],
-                link: commit.html_url,
-                pubDate: commit.commit.author.date,
-                summary: commit.commit.message.substring(0, 200) + '...',
-                source: source.name
-              }));
+              }            } else {
+              // Default behavior for other GitHub sources with date filtering
+              const today = new Date();
+              const yesterday = new Date(today);
+              yesterday.setDate(today.getDate() - 1);
+              
+              // Reset time to start of day for accurate comparison
+              const todayStart = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+              const yesterdayStart = new Date(yesterday.getFullYear(), yesterday.getMonth(), yesterday.getDate());
+              
+              recentCommits = response.data
+                .filter(commit => {
+                  const commitDate = new Date(commit.commit.author.date);
+                  const commitDateStart = new Date(commitDate.getFullYear(), commitDate.getMonth(), commitDate.getDate());
+                  return commitDateStart >= yesterdayStart;
+                })
+                .slice(0, 3)
+                .map(commit => ({
+                  title: commit.commit.message.split('\n')[0],
+                  link: commit.html_url,
+                  pubDate: commit.commit.author.date,
+                  summary: commit.commit.message.substring(0, 200) + '...',
+                  source: source.name
+                }));
             }
             
             console.log(`Found ${recentCommits.length} relevant items from ${source.name}`);
