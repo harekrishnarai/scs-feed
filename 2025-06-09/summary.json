@@ -1,0 +1,11 @@
+{
+  "date": "2025-06-09",
+  "totalReports": 12,
+  "sources": [
+    "OpenSSF Malicious Packages",
+    "Bleeping Computer Security",
+    "Endor Labs Blog",
+    "The Hacker News"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2025-06-09/supply-chain-report.md"
+}
