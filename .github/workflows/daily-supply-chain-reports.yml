@@ -567,12 +567,13 @@ jobs:
     - name: Commit and push changes
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        EMAIL: ${{ vars.EMAIL }}
       run: |
         # Set the TODAY variable
         TODAY=$(date +%Y-%m-%d)
         echo "Today's date: $TODAY"
         
-        git config --local user.email ${{ env.email }}
+        git config --local user.email "$EMAIL"
         git config --local user.name "harekrishnarai"
         
         # Check if there are any changes
