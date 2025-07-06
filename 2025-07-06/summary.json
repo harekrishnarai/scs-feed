@@ -1,0 +1,9 @@
+{
+  "date": "2025-07-06",
+  "totalReports": 8,
+  "sources": [
+    "OpenSSF Malicious Packages",
+    "The Hacker News"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2025-07-06/supply-chain-report.md"
+}
