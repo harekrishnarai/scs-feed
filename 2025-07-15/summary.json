@@ -1,0 +1,12 @@
+{
+  "date": "2025-07-15",
+  "totalReports": 34,
+  "sources": [
+    "Bleeping Computer Security",
+    "JFrog Security Blog",
+    "The Hacker News",
+    "Krebs on Security",
+    "OpenSSF Malicious Packages"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2025-07-15/supply-chain-report.md"
+}
