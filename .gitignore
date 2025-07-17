@@ -1,9 +1,11 @@
 # Node.js dependencies
 node_modules/
 package-lock.json
+package.json
 
 # Temporary script files (these are generated during CI)
 fetch_reports.js
+test_*.js
 
 # OS generated files
 .DS_Store
