@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@octokit/rest": "^22.0.0",
+    "axios": "^1.10.0",
+    "cheerio": "^1.1.0",
+    "rss-parser": "^3.13.0"
+  }
+}
