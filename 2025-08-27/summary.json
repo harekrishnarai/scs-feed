@@ -1,0 +1,15 @@
+{
+  "date": "2025-08-27",
+  "totalReports": 30,
+  "sources": [
+    "The Hacker News",
+    "Endor Labs Blog",
+    "JFrog Security Blog",
+    "Bleeping Computer Security",
+    "Sonatype Security Research",
+    "OpenSSF Malicious Packages",
+    "CISA Advisories",
+    "Schneier on Security"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2025-08-27/supply-chain-report.md"
+}
