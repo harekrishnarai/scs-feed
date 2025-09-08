@@ -14,6 +14,9 @@ This project automatically generates daily reports on supply chain security inci
 - **Schneier on Security** - Expert analysis on security topics
 - **Krebs on Security** - Investigative cybersecurity journalism
 - **CISA Advisories** - Official US government security advisories
+- **GitGuardian Blog** - Security insights, secrets management, and supply chain security
+- **StepSecurity Blog** - CI/CD security, GitHub Actions security, and supply chain protection
+- **Hacker News** - Technology news and discussions including security topics
 
 ### Research & Intelligence
 - **OpenSSF Package Analysis** - Open Source Security Foundation package research

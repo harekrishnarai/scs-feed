@@ -118,6 +118,24 @@ jobs:
             url: "https://rss.app/feeds/2NKFiwNFpKtgyl8r.xml",
             type: "rss",
             keywords: ["supply chain", "supply-chain", "dependency", "dependencies", "malicious package", "npm", "pypi", "vulnerability", "open source", "security", "component", "library", "package", "backdoor", "typosquatting", "socket"]
+          },
+          {
+            name: "GitGuardian Blog",
+            url: "https://blog.gitguardian.com/rss/",
+            type: "rss",
+            keywords: ["supply chain", "supply-chain", "dependency", "dependencies", "secrets", "security", "malicious package", "vulnerability", "open source", "component", "library", "package", "git", "github", "repository", "CI/CD", "pipeline", "DevSecOps", "backdoor", "compromise", "breach"]
+          },
+          {
+            name: "StepSecurity Blog",
+            url: "https://www.stepsecurity.io/blog/rss.xml",
+            type: "rss",
+            keywords: ["supply chain", "supply-chain", "dependency", "dependencies", "security", "CI/CD", "pipeline", "github actions", "workflow", "vulnerability", "SBOM", "DevSecOps", "component", "library", "package", "artifact", "build", "deployment", "attestation", "provenance"]
+          },
+          {
+            name: "Hacker News",
+            url: "https://hnrss.org/newest",
+            type: "rss",
+            keywords: ["supply chain", "supply-chain", "dependency", "dependencies", "malicious package", "npm", "pypi", "vulnerability", "backdoor", "security", "breach", "compromise", "software supply", "third-party", "component", "library", "typosquatting", "package manager", "repository"]
           }
         ];// Threat intelligence and vulnerability sources
         const apiSources = [
