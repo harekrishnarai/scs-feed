@@ -140,6 +140,12 @@ jobs:
         ];// Threat intelligence and vulnerability sources
         const apiSources = [
           {
+            name: "GitHub Security Advisories",
+            url: "https://api.github.com/advisories",
+            type: "ghsa",
+            keywords: ["supply chain", "supply-chain", "dependency", "dependencies", "malicious", "vulnerability", "component", "library", "package", "npm", "pypi", "maven", "nuget", "composer", "rubygems", "go", "rust", "backdoor", "typosquatting", "compromise"]
+          },
+          {
             name: "OpenSSF Malicious Packages",
             url: "https://api.github.com/repos/ossf/malicious-packages/commits",
             type: "github"
@@ -431,6 +437,95 @@ jobs:
           }
         }
 
+        async function fetchGitHubAdvisories(source) {
+          try {
+            console.log(`Starting fetch for ${source.name}...`);
+            
+            // Calculate date range (last 2 days)
+            const today = new Date();
+            const twoDaysAgo = new Date(today);
+            twoDaysAgo.setDate(today.getDate() - 2);
+            
+            const response = await axios.get(source.url, {
+              timeout: 15000,
+              headers: {
+                'User-Agent': 'Supply-Chain-Monitor/1.0',
+                'Accept': 'application/vnd.github+json'
+              },
+              params: {
+                per_page: 50,
+                sort: 'updated',
+                direction: 'desc',
+                published: `>=${twoDaysAgo.toISOString().split('T')[0]}`
+              }
+            });
+            
+            const advisories = response.data || [];
+            const relevantAdvisories = [];
+            
+            for (const advisory of advisories) {
+              // Date filtering - only include advisories from last 2 days
+              const advisoryDate = new Date(advisory.published_at || advisory.updated_at);
+              if (advisoryDate < twoDaysAgo) continue;
+              
+              // Check if advisory is supply chain related
+              const content = [
+                advisory.summary || '',
+                advisory.description || '',
+                (advisory.vulnerabilities || []).map(v => v.package?.name || '').join(' '),
+                (advisory.vulnerabilities || []).map(v => v.package?.ecosystem || '').join(' '),
+                (advisory.cwe_ids || []).join(' ')
+              ].join(' ').toLowerCase();
+              
+              const isRelevant = source.keywords.some(keyword => {
+                const keywordLower = keyword.toLowerCase();
+                if (content.includes(keywordLower)) return true;
+                
+                // Special handling for supply chain keywords
+                if (keywordLower.includes('supply chain') || keywordLower.includes('supply-chain')) {
+                  return content.includes('supply') && content.includes('chain');
+                }
+                
+                return false;
+              });
+              
+              if (isRelevant) {
+                // Extract ecosystem and package information
+                const ecosystems = (advisory.vulnerabilities || [])
+                  .map(v => v.package?.ecosystem)
+                  .filter(e => e)
+                  .join(', ');
+                
+                const packages = (advisory.vulnerabilities || [])
+                  .map(v => v.package?.name)
+                  .filter(p => p)
+                  .slice(0, 3)
+                  .join(', ');
+                
+                relevantAdvisories.push({
+                  title: `🚨 GHSA-${advisory.ghsa_id}: ${advisory.summary}`,
+                  link: advisory.html_url,
+                  pubDate: advisory.published_at || advisory.updated_at,
+                  summary: `${advisory.description?.substring(0, 200) || advisory.summary}${ecosystems ? ` | Ecosystems: ${ecosystems}` : ''}${packages ? ` | Packages: ${packages}` : ''} | Severity: ${advisory.severity?.toUpperCase() || 'UNKNOWN'}`,
+                  source: source.name,
+                  severity: advisory.severity,
+                  ecosystems: ecosystems,
+                  packages: packages,
+                  ghsa_id: advisory.ghsa_id,
+                  cve_id: advisory.cve_id
+                });
+              }
+            }
+            
+            console.log(`Found ${relevantAdvisories.length} relevant advisories from ${source.name}`);
+            return relevantAdvisories;
+            
+          } catch (error) {
+            console.error(`Error fetching ${source.name}:`, error.message);
+            return [];
+          }
+        }
+
         async function generateDailyReport() {
           console.log('Starting daily report generation...');
           const today = new Date();
@@ -457,6 +552,9 @@ jobs:
             console.log(`Fetching from ${source.name}...`);
             if (source.type === 'github') {
               const reports = await fetchGitHubCommits(source);
+              allReports = allReports.concat(reports);
+            } else if (source.type === 'ghsa') {
+              const reports = await fetchGitHubAdvisories(source);
               allReports = allReports.concat(reports);
             } else if (source.type === 'rss') {
               const reports = await fetchRSSFeed(source);
@@ -515,7 +613,7 @@ jobs:
           markdown += `**Last Updated:** ${new Date().toISOString()}\n`;
           
           // Write to file
-          const filePath = path.join(folderPath, 'supply-chain-report.md');
+          const filePath = path.join(folderPath, 'README.md');
           fs.writeFileSync(filePath, markdown);
           
           console.log(`Report generated: ${filePath}`);
@@ -631,8 +729,8 @@ jobs:
         # This section can be extended to create GitHub issues for critical alerts
         # Check if any reports contain critical keywords
         TODAY=$(date +%Y-%m-%d)
-        if [[ -f "$TODAY/supply-chain-report.md" ]]; then
-          CRITICAL_COUNT=$(grep -i "critical\|zero-day\|widespread\|major breach" "$TODAY/supply-chain-report.md" | wc -l)
+        if [[ -f "$TODAY/README.md" ]]; then
+          CRITICAL_COUNT=$(grep -i "critical\|zero-day\|widespread\|major breach" "$TODAY/README.md" | wc -l)
           if [[ $CRITICAL_COUNT -gt 0 ]]; then
             echo "Found $CRITICAL_COUNT potential critical alerts in today's report"
             # You can extend this to create GitHub issues using GitHub CLI

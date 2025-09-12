@@ -19,6 +19,7 @@ This project automatically generates daily reports on supply chain security inci
 - **Hacker News** - Technology news and discussions including security topics
 
 ### Research & Intelligence
+- **GitHub Security Advisories (GHSA)** - Official GitHub security vulnerability database
 - **OpenSSF Package Analysis** - Open Source Security Foundation package research
 - **Sonatype Security Research** - Commercial security research and threat intelligence
 
@@ -48,7 +49,7 @@ The system runs automatically every day at midnight UTC using GitHub Actions. It
 ├── .github/workflows/
 │   └── daily-supply-chain-reports.yml  # GitHub Actions workflow
 ├── 2025-06-01/                         # Daily report folders (YYYY-MM-DD)
-│   ├── supply-chain-report.md          # Main daily report
+│   ├── README.md                       # Main daily report
 │   └── summary.json                    # Report metadata
 ├── .gitignore                          # Git ignore rules
 └── README.md                           # This file

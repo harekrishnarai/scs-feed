@@ -234,7 +234,7 @@ async function sendReportToTelegram(reportPath) {
       
       // Add a final message with repository link
       const repoUrl = process.env.GITHUB_SERVER_URL + '/' + process.env.GITHUB_REPOSITORY;
-      const linkMessage = `📊 *View Today's Full Report*\n${repoUrl}/${reportPath.split('/').slice(-2)[0]}/supply-chain-report.md`;
+      const linkMessage = `📊 *View Today's Full Report*\n${repoUrl}/${reportPath.split('/').slice(-2)[0]}/README.md`;
       await sendTelegramMessage(botToken, chatId, linkMessage);
       
       console.log(`Successfully sent notification to chat ${chatId}`);
