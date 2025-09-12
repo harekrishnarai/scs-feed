@@ -139,16 +139,7 @@ jobs:
           }
         ];// Threat intelligence and vulnerability sources
         const apiSources = [
-          {
-            name: "OpenSSF Malicious Packages",
-            url: "https://api.github.com/repos/ossf/malicious-packages/commits",
-            type: "github"
-          },
-          {
-            name: "OpenSSF Package Analysis",
-            url: "https://api.github.com/repos/ossf/package-analysis/commits",
-            type: "github"
-          },{
+         {
             name: "Sonatype Security Research",
             url: "https://blog.sonatype.com/rss.xml",
             type: "rss",
@@ -638,3 +629,4 @@ jobs:
             # You can extend this to create GitHub issues using GitHub CLI
           fi
         fi
+
