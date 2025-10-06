@@ -1,0 +1,10 @@
+{
+  "date": "2025-10-06",
+  "totalReports": 5,
+  "sources": [
+    "Hacker News",
+    "GitGuardian Blog",
+    "The Hacker News"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2025-10-06/supply-chain-report.md"
+}
