@@ -1,0 +1,11 @@
+{
+  "date": "2025-10-13",
+  "totalReports": 8,
+  "sources": [
+    "Hacker News",
+    "Schneier on Security",
+    "Endor Labs Blog",
+    "The Hacker News"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2025-10-13/supply-chain-report.md"
+}
