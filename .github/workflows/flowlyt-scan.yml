@@ -31,6 +31,7 @@ jobs:
           upload-sarif: 'true'
           sarif-category: flowlyt
           create-issue: 'false'
+          config-file: ''
           issue-labels: security,flowlyt
           continue-on-error: 'false'
           verbose: 'false'
