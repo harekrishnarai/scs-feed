@@ -1,0 +1,28 @@
+name: Flowlyt manual scan
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  analyze:
+    name: Flowlyt security scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Flowlyt Security Scan
+        uses: harekrishnarai/flowlyt@v0.0.7
+        with:
+          output-format: 'sarif'
+          enable-ast-analysis: 'true'
+
+      - name: Upload SARIF to GitHub Security
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: flowlyt-results.sarif
