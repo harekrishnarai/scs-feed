@@ -19,9 +19,21 @@ jobs:
       - name: Run Flowlyt Security Scan
         uses: harekrishnarai/flowlyt@v0.0.7
         with:
-          output-format: 'sarif'
-          enable-ast-analysis: 'true'
-
+          # don't pass config-file or enable-ast-analysis (these are not required / invalid)
+          repository: .
+          output-format: sarif
+          output-file: flowlyt-results.sarif
+          min-severity: LOW
+          fail-on-severity: CRITICAL
+          max-critical: 0
+          max-high: 0
+          comment-on-pr: true
+          upload-sarif: 'true'
+          sarif-category: flowlyt
+          create-issue: 'false'
+          issue-labels: security,flowlyt
+          continue-on-error: 'false'
+          verbose: 'false'
       - name: Upload SARIF to GitHub Security
         uses: github/codeql-action/upload-sarif@v2
         with:
