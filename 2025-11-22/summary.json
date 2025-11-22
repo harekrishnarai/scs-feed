@@ -1,0 +1,10 @@
+{
+  "date": "2025-11-22",
+  "totalReports": 7,
+  "sources": [
+    "Hacker News",
+    "The Hacker News",
+    "Schneier on Security"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2025-11-22/supply-chain-report.md"
+}
