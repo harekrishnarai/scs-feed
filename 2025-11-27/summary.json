@@ -1,0 +1,14 @@
+{
+  "date": "2025-11-27",
+  "totalReports": 17,
+  "sources": [
+    "Hacker News",
+    "GitGuardian Blog",
+    "The Hacker News",
+    "Kiuwan Blog",
+    "Bleeping Computer Security",
+    "Endor Labs Blog",
+    "Krebs on Security"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2025-11-27/supply-chain-report.md"
+}
