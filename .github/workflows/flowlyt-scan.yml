@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Flowlyt Security Scan
-        uses: harekrishnarai/flowlyt@f9c1041af4ffe2a45adbe374c8d9d40fb07d3d6d
+        uses: harekrishnarai/flowlyt@latest
         with:
           # don't pass config-file or enable-ast-analysis (these are not required / invalid)
           repository: .
