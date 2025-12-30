@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Run Flowlyt Security Scan
-        uses: harekrishnarai/flowlyt@v1.0.2
+        uses: harekrishnarai/flowlyt@v1.0.5
         with:
           # don't pass config-file or enable-ast-analysis (these are not required / invalid)
           repository: .
@@ -36,6 +36,6 @@ jobs:
           continue-on-error: 'false'
           verbose: 'false'
       - name: Upload SARIF to GitHub Security
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: flowlyt-results.sarif
