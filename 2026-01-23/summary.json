@@ -1,0 +1,15 @@
+{
+  "date": "2026-01-23",
+  "totalReports": 17,
+  "sources": [
+    "Hacker News",
+    "Endor Labs Blog",
+    "Schneier on Security",
+    "The Hacker News",
+    "Bleeping Computer Security",
+    "StepSecurity Blog",
+    "GitGuardian Blog",
+    "Sonatype Security Research"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2026-01-23/supply-chain-report.md"
+}
