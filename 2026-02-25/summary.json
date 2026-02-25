@@ -3,11 +3,12 @@
   "totalReports": 15,
   "sources": [
     "Hacker News",
+    "StepSecurity Blog",
+    "Sonatype Security Research",
     "Bleeping Computer Security",
     "JFrog Security Blog",
     "The Hacker News",
     "Schneier on Security",
-    "StepSecurity Blog",
     "Endor Labs Blog",
     "Kiuwan Blog"
   ],

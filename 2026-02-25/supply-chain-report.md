@@ -8,43 +8,57 @@ This automated report aggregates supply chain security-related news, vulnerabili
 
 ## Hacker News
 
-### 1. Cloudflare: Run 15x more Containers with higher resource limits
+### 1. Anthropic acquires Vercept_AI to advance Claude's computer use capabilities
 
-**Link:** [https://developers.cloudflare.com/changelog/post/2026-02-25-higher-container-resource-limits/](https://developers.cloudflare.com/changelog/post/2026-02-25-higher-container-resource-limits/)
+**Link:** [https://twitter.com/AnthropicAI/status/2026705792033026465](https://twitter.com/AnthropicAI/status/2026705792033026465)
 
 **Published:** 2/25/2026
 
-**Summary:** Article URL: https://developers.cloudflare.com/changelog/post/2026-02-25-higher-container-resource-limits/ Comments URL: https://news.ycombinator.com/item?id=47152513 Points: 1 # Comments: 0
+**Summary:** Article URL: https://twitter.com/AnthropicAI/status/2026705792033026465 Comments URL: https://news.ycombinator.com/item?id=47155746 Points: 1 # Comments: 1
 
 ---
 
-### 2. Show HN: MCPSpec – Ship reliable MCP servers without writing test code
+### 2. Canadian Tire data breach exposed almost 42M records
 
-**Link:** [https://light-handle.github.io/mcpspec/](https://light-handle.github.io/mcpspec/)
+**Link:** [https://haveibeenpwned.com/Breach/CanadianTire](https://haveibeenpwned.com/Breach/CanadianTire)
 
 **Published:** 2/25/2026
 
-**Summary:** Hi HN, I've been building MCPSpec, an open-source CLI for MCP server reliability. Record sessions, generate mock servers, catch Tool Poisoning, and fail your CI build when something's wrong — without writing test code. There are ways to validate MCP servers today — the MCP Inspector, ad-hoc SDK scripts, unit tests for server internals — but nothing that handles regression detection, security auditing, mock generation, and CI pass/fail checks in one tool. MCPSpec does that: 1. Record a session against your real server, replay it after changes to catch regressions 2. Generate a standalone .js mock from any recording — no API keys, no live server needed in CI 3. Security audit with 8 rules including Tool Poisoning (prompt injection hidden in tool descriptions) 4. 0-100 quality score across documentation, schema quality, error handling, responsiveness, and security 5. One command to generate GitHub Actions / GitLab CI configs No LLMs in the loop. Deterministic and fast. Ships with 70 ready-to-run tests for 7 popular MCP servers. GitHub: https://github.com/light-handle/mcpspec Docs: https://light-handle.github.io/mcpspec/ Would love feedback or feature ideas. Comments URL: https://news.ycombinator.com/item?id=47152493 Points: 1 # Comments: 0
+**Summary:** Article URL: https://haveibeenpwned.com/Breach/CanadianTire Comments URL: https://news.ycombinator.com/item?id=47155552 Points: 1 # Comments: 1
 
 ---
 
-### 3. Ask HN: Is RAG an antipattern for AI agents?
+## StepSecurity Blog
 
-**Link:** [https://news.ycombinator.com/item?id=47152473](https://news.ycombinator.com/item?id=47152473)
+### 1. Harden Runner Now Supports Windows and macOS GitHub Actions Runners 
+
+**Link:** [https://www.stepsecurity.io/blog/harden-runner-now-supports-windows-and-macos-github-actions-runners](https://www.stepsecurity.io/blog/harden-runner-now-supports-windows-and-macos-github-actions-runners)
 
 **Published:** 2/25/2026
 
-**Summary:** Every agent framework I've used treats document retrieval the same way: build a custom pipeline, pick an embedding model, set up a vector store, wire it all into a tool. Repeat for every new project. I'm starting to think this is the wrong abstraction entirely. The universal interface every agent already supports is reading files. So I've been designing around that instead: Mount a drive at /drive/ with two directories: - /drive/files/ — actual documents (PDF, code, markdown, etc.) - /drive/search/ — virtual directory where the filename IS the query Agent wants context on "refund policy for enterprise customers"? cat "/drive/search/refund policy for enterprise customers" Returns the most relevant chunk. No custom tool. No vector store API. No pipeline to maintain. Any runtime that reads files works immediately. Under the hood: markitdown for parsing, sqlite-vss for search, virtual filesystem layer for the interface. Is this a solved problem I'm not aware of? Or is the "each agent builds its own RAG" approach as wasteful as it feels? Building in public if there's interest — @r_klosowski on X. Comments URL: https://news.ycombinator.com/item?id=47152473 Points: 1 # Comments: 0
+**Summary:** Harden Runner now supports Windows and macOS GitHub Actions runners, delivering EDR-level runtime security across Linux, Windows, and macOS CI/CD pipelines
 
 ---
 
-### 4. Show HN: Crewly Codes – AI crew that specs, builds, and QAs your features
+### 2. Securing Vibe Coding and AI Coding Agents: An End-to-End Approach with StepSecurity 
 
-**Link:** [https://crewly.codes](https://crewly.codes)
+**Link:** [https://www.stepsecurity.io/blog/securing-vibe-coding-and-ai-coding-agents-an-end-to-end-approach-with-stepsecurity](https://www.stepsecurity.io/blog/securing-vibe-coding-and-ai-coding-agents-an-end-to-end-approach-with-stepsecurity)
+
+**Published:** 2/24/2026
+
+**Summary:** AI coding agents install packages, create pull requests, push commits, and run autonomously in CI/CD pipelines. Here's how to secure every stage of that workflow
+
+---
+
+## Sonatype Security Research
+
+### 1. Modern Vulnerability Management in the Age of AI
+
+**Link:** [https://www.sonatype.com/blog/modern-vulnerability-management-in-the-age-of-ai](https://www.sonatype.com/blog/modern-vulnerability-management-in-the-age-of-ai)
 
 **Published:** 2/25/2026
 
-**Summary:** Hey HN, Crewly Codes is an AI product dev workflow where the AI specs the work before writing code. Morgan (AI PM) turns your idea into structured specs — user stories, acceptance criteria, edge cases. You lock the spec, DevCrew builds it, QA validates it. Watch it happen or come back to finished code. The thesis: most AI coding failures are spec failures. The AI builds the wrong thing because no one defined "done." Morgan forces that upfront. Multi-agent but orchestrated — sequential handoffs with shared context, not parallel chaos. Runs inside Claude Code and Codex. Free tier available. Comments URL: https://news.ycombinator.com/item?id=47152389 Points: 1 # Comments: 0
+**Summary:** Vulnerability management today is not failing because teams stopped scanning. It's failing because the ground underneath it shifted. The approach we've relied on — complete advisory data, upstream fixes on demand, and fast upgrades — no longer holds up.
 
 ---
 
@@ -136,18 +150,6 @@ This automated report aggregates supply chain security-related news, vulnerabili
 
 ---
 
-## StepSecurity Blog
-
-### 1. Securing Vibe Coding and AI Coding Agents: An End-to-End Approach with StepSecurity 
-
-**Link:** [https://www.stepsecurity.io/blog/securing-vibe-coding-and-ai-coding-agents-an-end-to-end-approach-with-stepsecurity](https://www.stepsecurity.io/blog/securing-vibe-coding-and-ai-coding-agents-an-end-to-end-approach-with-stepsecurity)
-
-**Published:** 2/24/2026
-
-**Summary:** AI coding agents install packages, create pull requests, push commits, and run autonomously in CI/CD pipelines. Here's how to secure every stage of that workflow
-
----
-
 ## Endor Labs Blog
 
 ### 1. Anthropic just validated that AppSec is the biggest opportunity in cybersecurity | Blog | Endor Labs
@@ -197,4 +199,4 @@ This report is automatically generated daily by monitoring various cybersecurity
 
 **Keywords Monitored:** supply chain, dependency, package, malicious package, software supply, npm, pypi, backdoor, vulnerability
 
-**Last Updated:** 2026-02-25T15:12:26.153Z
+**Last Updated:** 2026-02-25T18:46:58.331Z
