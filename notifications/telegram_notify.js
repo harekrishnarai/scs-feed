@@ -18,18 +18,38 @@ const path = require('path');
  * @returns {Promise} - Promise resolving to the Telegram API response
  */
 async function sendTelegramMessage(botToken, chatId, message) {
+  const apiUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+
   try {
-    const response = await axios.post(
-      `https://api.telegram.org/bot${botToken}/sendMessage`,
-      {
-        chat_id: chatId,
-        text: message,
-        parse_mode: 'Markdown',
-        disable_web_page_preview: false
-      }
-    );
+    const response = await axios.post(apiUrl, {
+      chat_id: chatId,
+      text: message,
+      parse_mode: 'Markdown',
+      disable_web_page_preview: false
+    });
     return response.data;
   } catch (error) {
+    const telegramDescription = error?.response?.data?.description || '';
+    const isMarkdownParseError = telegramDescription.includes("can't parse entities");
+
+    if (isMarkdownParseError) {
+      try {
+        console.warn('Markdown parsing failed, retrying as plain text...');
+        const fallbackResponse = await axios.post(apiUrl, {
+          chat_id: chatId,
+          text: message,
+          disable_web_page_preview: false
+        });
+        return fallbackResponse.data;
+      } catch (fallbackError) {
+        console.error('Fallback plain text send also failed:', fallbackError.message);
+        if (fallbackError.response) {
+          console.error('Telegram fallback API response:', fallbackError.response.data);
+        }
+        throw fallbackError;
+      }
+    }
+
     console.error('Error sending Telegram message:', error.message);
     if (error.response) {
       console.error('Telegram API response:', error.response.data);
@@ -207,7 +227,9 @@ function formatReportForTelegram(reportContent) {
  */
 async function sendReportToTelegram(reportPath) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
-  const chatIds = process.env.TELEGRAM_CHAT_IDS ? process.env.TELEGRAM_CHAT_IDS.split(',') : [];
+  const chatIds = process.env.TELEGRAM_CHAT_IDS
+    ? process.env.TELEGRAM_CHAT_IDS.split(',').map((chatId) => chatId.trim()).filter(Boolean)
+    : [];
   
   if (!botToken || chatIds.length === 0) {
     console.log('Telegram notification skipped: Bot token or chat IDs not configured');
