@@ -10,14 +10,18 @@ permissions:
 jobs:
   analyze:
     name: Flowlyt security scan
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@fe104658747b27e96e4f7e80cd0a94068e53901d # v2.16.1
+        with:
+          egress-policy: audit
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6 on 2026-04-09
 
       - name: Run Flowlyt Security Scan
-        uses: harekrishnarai/flowlyt@v1.0.5
+        uses: harekrishnarai/flowlyt@d54efdc4a631cb6e121067e1b0bb3eda3708b153 # v1.0.5 on 2026-04-09
         with:
           # don't pass config-file or enable-ast-analysis (these are not required / invalid)
           repository: .
@@ -36,6 +40,6 @@ jobs:
           continue-on-error: 'false'
           verbose: 'false'
       - name: Upload SARIF to GitHub Security
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@3b1a19a80ab047f35cbb237b5bd9bdc1e14f166c # v3 on 2026-04-09
         with:
           sarif_file: flowlyt-results.sarif
