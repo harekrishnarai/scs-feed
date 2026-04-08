@@ -1,10 +1,22 @@
 # Supply Chain Security Daily Report
 **Date:** 2026-04-08
-**Total Reports Found:** 14
+**Total Reports Found:** 15
 
 ## Summary
 
 This automated report aggregates supply chain security-related news, vulnerabilities, and research from multiple trusted sources.
+
+## Hacker News
+
+### 1. Free Google Workspace Account Falsely Accused of Commercial Use
+
+**Link:** [https://news.ycombinator.com/item?id=47695419](https://news.ycombinator.com/item?id=47695419)
+
+**Published:** 4/8/2026
+
+**Summary:** We all know Google has been trying to get rid of their free legacy Google Workspace accounts. They almost did it entirely awhile back, and recanted at the last second. I have had one of these accounts since it was known as Google Apps For Your Domain. It’s the primary Google account for me and several of my friends. We weren’t using it for business then, and we are not using it for business now. I only ever wanted to have a normal consumer free Google account, but I also wanted for me and my friends to be able to use our domain on our email addresses instead of gmail.com. Because of that, we have been trapped in Google Workspaces for twenty years. Such a big mistake. If only I had a time machine to go back and stop myself. Just last week I got an e-mail that said our still-free Google Workspaces account has been flagged for violating the personal non-commercial use policy. We either have to upgrade to a paid account, have our accounts deleted, or appeal. Of course I appealed with no expectation of success. There was no way to add any information to the appeal. It was just a button. Yes, I appeal. The appeal was, unsurprisingly, denied. No explanation. No evidence. Just a flat denial with no further options or information provided. Do you want to read the policy? The link they give is here: https://knowledge.workspace.google.com/admin/billing/transition-from-a-free-edition The only policy I can find on that page is the phrase "personal non-commercial use." If anyone has a link to a more detailed explanation of the policy, so that I might find any hints as to how we may have violated it, please let me know. Now for me and a handful of friends it seems our only option is to pay the absurd price of $7/month per seat for the same exact service we would get from consumer GMail accounts other than the custom domain on our e-mail addresses. At least that’s until we go through the huge effort of doing a bunch of Google takeout and re-imports to somewhere else. Yes, I have automated backups because I have been prepared for this sort of situation. But it’s still going to be a painful migration that I would rather not have to do in the first place. I know people sometimes post stories like this on HN hoping that a powerful person at the big tech company will notice and come in to fix the situation. I can’t deny, I wouldn’t complain if that happened. But I have no expectations of that. I also don’t like getting special treatment. What I really want is for all users to be treated just as fairly. Instead of begging for help, what I want is to advocate for a legal remedy. I actually agree that private companies should be able to set almost any usage policy they want for their services and ban anyone at any time for nearly any reason. However, I believe they should have the legal requirement to publish those policies in full. If a user is found in violation of those policies the company should be required to cite exactly which part of the policy was violated. Furthermore, they should be required to produce the evidence that led to their decision. I also think it would be ideal if they were required to supply a real-human appeals process. But at least if they cite the policy and provide their evidence it would make it easier for users to seek a remedy via the legal system, or by arbitration (if there is a binding arbitration clause). Lastly, I want to advise and remind everyone. Any time you sign up for any platform you do not control, always be prepared for those accounts to be deleted at any time without warning. That’s why I put the backup process in place a very long time ago. And that is why I stopped signing up for new proprietary platforms. The ones I still use are the last ones I will ever use. However much the hassle is to setup self-hosting, I promise you, it is a lot less painful than being forced to escape a proprietary platform when it inevitably boots you out or shuts down. Comments URL: https://news.ycombinator.com/item?id=47695419 Points: 2 # Comments: 0
+
+---
 
 ## The Hacker News
 
@@ -183,4 +195,4 @@ This report is automatically generated daily by monitoring various cybersecurity
 
 **Keywords Monitored:** supply chain, dependency, package, malicious package, software supply, npm, pypi, backdoor, vulnerability
 
-**Last Updated:** 2026-04-08T18:51:29.663Z
+**Last Updated:** 2026-04-08T20:16:21.060Z

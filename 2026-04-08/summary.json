@@ -1,7 +1,8 @@
 {
   "date": "2026-04-08",
-  "totalReports": 14,
+  "totalReports": 15,
   "sources": [
+    "Hacker News",
     "The Hacker News",
     "Endor Labs Blog",
     "Schneier on Security",
