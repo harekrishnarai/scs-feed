@@ -1,6 +1,6 @@
 # Supply Chain Security Daily Report
 **Date:** 2026-04-09
-**Total Reports Found:** 3
+**Total Reports Found:** 5
 
 ## Summary
 
@@ -8,7 +8,27 @@ This automated report aggregates supply chain security-related news, vulnerabili
 
 ## The Hacker News
 
-### 1. New Chaos Variant Targets Misconfigured Cloud Deployments, Adds SOCKS Proxy
+### 1. UAT-10362 Targets Taiwanese NGOs with LucidRook Malware in Spear-Phishing Campaigns
+
+**Link:** [https://thehackernews.com/2026/04/uat-10362-targets-taiwanese-ngos-with.html](https://thehackernews.com/2026/04/uat-10362-targets-taiwanese-ngos-with.html)
+
+**Published:** 4/9/2026
+
+**Summary:** A previously undocumented threat cluster dubbed UAT-10362 has been attributed to spear-phishing campaigns targeting Taiwanese non-governmental organizations (NGOs) and suspected universities to deploy a new Lua-based malware called LucidRook. "LucidRook is a sophisticated stager that embeds a Lua interpreter and Rust-compiled libraries within a dynamic-link library (DLL) to download and
+
+---
+
+### 2. Adobe Reader Zero-Day Exploited via Malicious PDFs Since December 2025
+
+**Link:** [https://thehackernews.com/2026/04/adobe-reader-zero-day-exploited-via.html](https://thehackernews.com/2026/04/adobe-reader-zero-day-exploited-via.html)
+
+**Published:** 4/9/2026
+
+**Summary:** Threat actors have been exploiting a previously unknown zero-day vulnerability in Adobe Reader using maliciously crafted PDF documents since at least December 2025. The finding, detailed by EXPMON's Haifei Li, has been described as a highly-sophisticated PDF exploit. The artifact ("Invoice540.pdf") first appeared on the VirusTotal platform on November 28, 2025. A second
+
+---
+
+### 3. New Chaos Variant Targets Misconfigured Cloud Deployments, Adds SOCKS Proxy
 
 **Link:** [https://thehackernews.com/2026/04/new-chaos-variant-targets-misconfigured.html](https://thehackernews.com/2026/04/new-chaos-variant-targets-misconfigured.html)
 
@@ -18,7 +38,7 @@ This automated report aggregates supply chain security-related news, vulnerabili
 
 ---
 
-### 2. APT28 Deploys PRISMEX Malware in Campaign Targeting Ukraine and NATO Allies
+### 4. APT28 Deploys PRISMEX Malware in Campaign Targeting Ukraine and NATO Allies
 
 **Link:** [https://thehackernews.com/2026/04/apt28-deploys-prismex-malware-in.html](https://thehackernews.com/2026/04/apt28-deploys-prismex-malware-in.html)
 
@@ -28,7 +48,7 @@ This automated report aggregates supply chain security-related news, vulnerabili
 
 ---
 
-### 3. N. Korean Hackers Spread 1,700 Malicious Packages Across npm, PyPI, Go, Rust
+### 5. N. Korean Hackers Spread 1,700 Malicious Packages Across npm, PyPI, Go, Rust
 
 **Link:** [https://thehackernews.com/2026/04/n-korean-hackers-spread-1700-malicious.html](https://thehackernews.com/2026/04/n-korean-hackers-spread-1700-malicious.html)
 
@@ -63,4 +83,4 @@ This report is automatically generated daily by monitoring various cybersecurity
 
 **Keywords Monitored:** supply chain, dependency, package, malicious package, software supply, npm, pypi, backdoor, vulnerability
 
-**Last Updated:** 2026-04-09T07:04:05.390Z
+**Last Updated:** 2026-04-09T18:46:41.371Z
