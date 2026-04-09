@@ -1,62 +1,10 @@
 # Supply Chain Security Daily Report
 **Date:** 2026-04-09
-**Total Reports Found:** 11
+**Total Reports Found:** 3
 
 ## Summary
 
 This automated report aggregates supply chain security-related news, vulnerabilities, and research from multiple trusted sources.
-
-## Hacker News
-
-### 1. Hungary is not just an illiberal state. It is a state with a moral mission
-
-**Link:** [https://www.noemamag.com/the-return-of-the-moral-state/](https://www.noemamag.com/the-return-of-the-moral-state/)
-
-**Published:** 4/9/2026
-
-**Summary:** Article URL: https://www.noemamag.com/the-return-of-the-moral-state/ Comments URL: https://news.ycombinator.com/item?id=47700058 Points: 1 # Comments: 0
-
----
-
-### 2. SecureDrop is an open source whistleblower submission system
-
-**Link:** [https://securedrop.org/](https://securedrop.org/)
-
-**Published:** 4/9/2026
-
-**Summary:** Article URL: https://securedrop.org/ Comments URL: https://news.ycombinator.com/item?id=47699995 Points: 1 # Comments: 0
-
----
-
-### 3. AI Cybersecurity After Mythos: The Jagged Frontier
-
-**Link:** [https://aisle.com/blog/ai-cybersecurity-after-mythos-the-jagged-frontier](https://aisle.com/blog/ai-cybersecurity-after-mythos-the-jagged-frontier)
-
-**Published:** 4/9/2026
-
-**Summary:** Article URL: https://aisle.com/blog/ai-cybersecurity-after-mythos-the-jagged-frontier Comments URL: https://news.ycombinator.com/item?id=47699963 Points: 2 # Comments: 1
-
----
-
-### 4. Keychron's keyboards are now open source
-
-**Link:** [https://github.com/Keychron/Keychron-Keyboards-Hardware-Design](https://github.com/Keychron/Keychron-Keyboards-Hardware-Design)
-
-**Published:** 4/9/2026
-
-**Summary:** Article URL: https://github.com/Keychron/Keychron-Keyboards-Hardware-Design Comments URL: https://news.ycombinator.com/item?id=47699911 Points: 1 # Comments: 0
-
----
-
-### 5. I built an open-source research lab that reads papers and iterates autonomously
-
-**Link:** [https://github.com/dimalik/arcana](https://github.com/dimalik/arcana)
-
-**Published:** 4/9/2026
-
-**Summary:** Article URL: https://github.com/dimalik/arcana Comments URL: https://news.ycombinator.com/item?id=47699891 Points: 1 # Comments: 0
-
----
 
 ## The Hacker News
 
@@ -90,40 +38,6 @@ This automated report aggregates supply chain security-related news, vulnerabili
 
 ---
 
-## Endor Labs Blog
-
-### 1. What Security and Engineering Teams Fear Most About Malware | Blog | Endor Labs
-
-**Link:** [https://www.endorlabs.com/learn/what-security-and-engineering-teams-fear-most-about-malware](https://www.endorlabs.com/learn/what-security-and-engineering-teams-fear-most-about-malware)
-
-**Published:** 4/8/2026
-
-**Summary:** What do security practitioners and software engineers actually fear about open source malware? We asked 605 professionals. Here is what 141 of them said, in their own words.
-
----
-
-### 2. Best Code Security Platforms in 2026, Compared | Blog | Endor Labs
-
-**Link:** [https://www.endorlabs.com/learn/best-code-security-tools](https://www.endorlabs.com/learn/best-code-security-tools)
-
-**Published:** 4/8/2026
-
-**Summary:** Best code security platforms compared: 8 tools rated on reachability analysis, false positive rates, and workflow integration so you fix real risks, not noise.
-
----
-
-## Schneier on Security
-
-### 1. Python Supply-Chain Compromise
-
-**Link:** [https://www.schneier.com/blog/archives/2026/04/python-supply-chain-compromise.html](https://www.schneier.com/blog/archives/2026/04/python-supply-chain-compromise.html)
-
-**Published:** 4/8/2026
-
-**Summary:** This is news: A malicious supply chain compromise has been identified in the Python Package Index package litellm version 1.82.8. The published wheel contains a malicious .pth file (litellm_init.pth, 34,628 bytes) which is automatically executed by the Python interpreter on every startup, without requiring any explicit import of the litellm module.  There are a lot of really boring things we need to do to help secure all of these critical libraries: SBOMs, SLSA, SigStore. But we have to do them.
-
----
-
 ## About This Report
 
 This report is automatically generated daily by monitoring various cybersecurity news sources, RSS feeds, and research repositories for supply chain security-related content.
@@ -149,4 +63,4 @@ This report is automatically generated daily by monitoring various cybersecurity
 
 **Keywords Monitored:** supply chain, dependency, package, malicious package, software supply, npm, pypi, backdoor, vulnerability
 
-**Last Updated:** 2026-04-09T06:52:46.705Z
+**Last Updated:** 2026-04-09T07:04:05.390Z
