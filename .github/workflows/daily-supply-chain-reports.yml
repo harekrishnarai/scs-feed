@@ -20,7 +20,15 @@ jobs:
       uses: step-security/harden-runner@fe104658747b27e96e4f7e80cd0a94068e53901d # v2.16.1
       with:
         disable-telemetry: true
-        egress-policy: audit
+        egress-policy: block
+        allowed-endpoints: >
+            github.com:443
+            api.github.com:443
+            objects.githubusercontent.com:443
+            proxy.golang.org:443
+            registry.npmjs.org:443
+            www.bleepingcomputer.com:443
+            feeds.feedburner.com:443
     - name: Checkout repository
       uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4 on 2026-04-09
       
