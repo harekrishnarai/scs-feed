@@ -1,0 +1,11 @@
+{
+  "date": "2026-07-06",
+  "totalReports": 10,
+  "sources": [
+    "Hacker News",
+    "The Hacker News",
+    "Sonatype Security Research",
+    "Schneier on Security"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2026-07-06/supply-chain-report.md"
+}
