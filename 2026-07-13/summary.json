@@ -1,0 +1,13 @@
+{
+  "date": "2026-07-13",
+  "totalReports": 14,
+  "sources": [
+    "Hacker News",
+    "Endor Labs Blog",
+    "The Hacker News",
+    "Krebs on Security",
+    "StepSecurity Blog",
+    "GitGuardian Blog"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2026-07-13/supply-chain-report.md"
+}
