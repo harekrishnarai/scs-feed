@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-28",
+  "totalReports": 8,
+  "sources": [
+    "Hacker News",
+    "Schneier on Security",
+    "Bleeping Computer Security",
+    "StepSecurity Blog",
+    "The Hacker News"
+  ],
+  "reportPath": "/home/runner/work/scs-feed/scs-feed/2026-11-28/supply-chain-report.md"
+}
